@@ -22,17 +22,17 @@
 
 require 'test/unit'
 
-require 'ads_common/config'
-require 'ads_common/savon_service'
+require 'ads_common_bing/config'
+require 'ads_common_bing/savon_service'
 
 # SavonService is abstract, defining a child class for the test.
-class StubService < AdsCommon::SavonService
+class StubService < AdsCommonBing::SavonService
 
   public :get_service_registry, :get_module
 
   def initialize(namespace, endpoint, version)
     @logger = Logger.new(STDERR)
-    @config = AdsCommon::Config.new({:library => {:logger => @logger}})
+    @config = AdsCommonBing::Config.new({:library => {:logger => @logger}})
     super(@config, namespace, endpoint, version)
   end
 end
@@ -51,7 +51,7 @@ class TestSavonService < Test::Unit::TestCase
 
   def test_initialize_abstract()
     assert_raises(NoMethodError) do
-      AdsCommon::SavonService.new(nil, TEST_NAMESPACE, TEST_ENDPOINT,
+      AdsCommonBing::SavonService.new(nil, TEST_NAMESPACE, TEST_ENDPOINT,
           TEST_VERSION)
     end
     assert_nothing_raised do

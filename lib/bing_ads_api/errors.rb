@@ -6,7 +6,7 @@ module BingAdsApi
 
     # This class encapsulates base class for API exceptions. More specific
     # exceptions are generated based on Service WSDL.
-    class ApiException < AdsCommonForBingAds::Errors::ApiException
+    class ApiException < AdsCommonBingForBingAds::Errors::ApiException
       attr_reader :array_fields
 
       def initialize(exception_fault)
@@ -37,15 +37,15 @@ module BingAdsApi
     end
 
     # Error for invalid credentials sush as malformed ID.
-    class BadCredentialsError < AdsCommonForBingAds::Errors::ApiException
+    class BadCredentialsError < AdsCommonBingForBingAds::Errors::ApiException
     end
 
     # Error for malformed report definition.
-    class InvalidReportDefinitionError < AdsCommonForBingAds::Errors::ApiException
+    class InvalidReportDefinitionError < AdsCommonBingForBingAds::Errors::ApiException
     end
 
     # Error for server-side report error.
-    class ReportError < AdsCommonForBingAds::Errors::ApiException
+    class ReportError < AdsCommonBingForBingAds::Errors::ApiException
       attr_reader :http_code
 
       def initialize(http_code, message)
@@ -556,7 +556,7 @@ module BingAdsApi
     }
     CODES.each do |_, constant|
       unless const_defined?(constant)
-        const_set(constant,Class.new(AdsCommonForBingAds::Errors::ApiException))
+        const_set(constant,Class.new(AdsCommonBingForBingAds::Errors::ApiException))
       end
     end
 

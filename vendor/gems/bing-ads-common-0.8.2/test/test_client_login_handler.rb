@@ -22,10 +22,10 @@
 
 require 'test/unit'
 
-require 'ads_common/config'
-require 'ads_common/auth/client_login_handler'
+require 'ads_common_bing/config'
+require 'ads_common_bing/auth/client_login_handler'
 
-module AdsCommon
+module AdsCommonBing
   module Auth
     class ClientLoginHandler
 
@@ -52,13 +52,13 @@ end
 class TestClientLoginHandler < Test::Unit::TestCase
 
   def setup()
-    config = AdsCommon::Config.new({})
-    @handler = AdsCommon::Auth::ClientLoginHandler.new(
+    config = AdsCommonBing::Config.new({})
+    @handler = AdsCommonBing::Auth::ClientLoginHandler.new(
         config, 'http://www.google.com', 'adwords')
   end
 
   def test_handle_login_error_captcha()
-    assert_raises (AdsCommon::Errors::CaptchaRequiredError) do
+    assert_raises (AdsCommonBing::Errors::CaptchaRequiredError) do
       response = ResponseStub.new(403, '')
       results = {
           'Error' => 'CaptchaRequired',
@@ -69,7 +69,7 @@ class TestClientLoginHandler < Test::Unit::TestCase
   end
 
   def test_handle_login_error_other()
-    assert_raises(AdsCommon::Errors::AuthError) do
+    assert_raises(AdsCommonBing::Errors::AuthError) do
       response = ResponseStub.new(403, 'Body')
       results = {'Error' => 'SomeError', 'Info' => 'SomeInfo'}
       @handler.handle_login_error({}, response, results)
@@ -116,10 +116,10 @@ class TestClientLoginHandler < Test::Unit::TestCase
   def test_validate_credentials_invalid()
     credentials1 = {:email => 'email@example.com'}
     credentials2 = {:password => 'qwerty'}
-    assert_raises(AdsCommon::Errors::AuthError) do
+    assert_raises(AdsCommonBing::Errors::AuthError) do
       @handler.validate_credentials(credentials1)
     end
-    assert_raises(AdsCommon::Errors::AuthError) do
+    assert_raises(AdsCommonBing::Errors::AuthError) do
       @handler.validate_credentials(credentials2)
     end
   end

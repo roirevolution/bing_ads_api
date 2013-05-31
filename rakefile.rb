@@ -31,10 +31,10 @@ lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 # GENERATE API SERVICES
-require 'ads_common_for_bing_ads'
+require 'ads_common_bing_for_bing_ads'
 require 'bing_ads_api/api_config'
-require 'ads_common_for_bing_ads/api_config'
-require 'ads_common_for_bing_ads/build/savon_registry'
+require 'ads_common_bing_for_bing_ads/api_config'
+require 'ads_common_bing_for_bing_ads/build/savon_registry'
 desc 'Generate the Bing Ads API stubs.'
 
 task :generate do
@@ -47,7 +47,7 @@ task :generate do
     wsdls = BingAdsApi::ApiConfig.get_wsdls(version)
     wsdls.each do |service_name, wsdl_url|
       logger.info('Processing %s at [%s]...' % [service_name, wsdl_url])
-      generator = AdsCommonForBingAds::Build::SavonGenerator.new(wsdl_url, code_path, api_config.api_name, version, service_name)
+      generator = AdsCommonBingForBingAds::Build::SavonGenerator.new(wsdl_url, code_path, api_config.api_name, version, service_name)
       generator.process_wsdl()
     end
   end

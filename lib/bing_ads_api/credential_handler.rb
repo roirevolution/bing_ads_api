@@ -1,7 +1,7 @@
 require 'bing_ads_api/api_config'
 
 module BingAdsApi
-  class CredentialHandler < AdsCommonForBingAds::CredentialHandler
+  class CredentialHandler < AdsCommonBingForBingAds::CredentialHandler
     # Whether we're making MCC-level requests.
     attr_accessor :use_mcc
     # Whether we're making validate-only requests.
@@ -50,7 +50,7 @@ module BingAdsApi
     # environment.
     #
     # Raises:
-    # - AdsCommonForBingAds::Error::EnvironmentMismatchError if sandbox credentials are
+    # - AdsCommonBingForBingAds::Error::EnvironmentMismatchError if sandbox credentials are
     # being used for production or vice-versa.
     # - BingAdsApi::Errors:BadCredentialsError if supplied credentials are not
     # valid.
@@ -75,12 +75,12 @@ module BingAdsApi
       #case environment
       #  when :PRODUCTION
       #    if sandbox_token
-      #      raise AdsCommonForBingAds::Errors::EnvironmentMismatchError,
+      #      raise AdsCommonBingForBingAds::Errors::EnvironmentMismatchError,
       #          'Attempting to connect to production with sandbox credentials.'
       #    end
       #  when :SANDBOX
       #    if (!sandbox_token)
-      #      raise AdsCommonForBingAds::Errors::EnvironmentMismatchError,
+      #      raise AdsCommonBingForBingAds::Errors::EnvironmentMismatchError,
       #          'Attempting to connect to the sandbox with malformatted ' +
       #          'credentials. Please check http://msdn.microsoft.com/en-US/library/aa983013 for details.'
       #    end

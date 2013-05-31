@@ -8,9 +8,9 @@ module BingAdsApi
   # Contains helper methods for loading and managing the available services.
   module ApiConfig
 
-    # Inherit from AdsCommonForBingAds::ApiConfig
+    # Inherit from AdsCommonBingForBingAds::ApiConfig
     class << ApiConfig
-      include AdsCommonForBingAds::ApiConfig
+      include AdsCommonBingForBingAds::ApiConfig
     end
 
     # Set defaults

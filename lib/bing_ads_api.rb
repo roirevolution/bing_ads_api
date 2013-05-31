@@ -2,12 +2,12 @@ require 'savon'
 require 'httpi'
 require 'active_support/inflector'
 
-require 'ads_common_for_bing_ads'
-require 'ads_common_for_bing_ads/api_config'
-require 'ads_common_for_bing_ads/parameters_validator'
-require 'ads_common_for_bing_ads/auth/client_login_handler'
-require 'ads_common_for_bing_ads/savon_service'
-require 'ads_common_for_bing_ads/savon_headers_base_header_handler'
+require 'ads_common_bing_for_bing_ads'
+require 'ads_common_bing_for_bing_ads/api_config'
+require 'ads_common_bing_for_bing_ads/parameters_validator'
+require 'ads_common_bing_for_bing_ads/auth/client_login_handler'
+require 'ads_common_bing_for_bing_ads/savon_service'
+require 'ads_common_bing_for_bing_ads/savon_headers_base_header_handler'
 require 'bing_ads_api/api_config'
 require 'bing_ads_api/client_login_header_handler'
 require 'bing_ads_api/credential_handler'
@@ -20,7 +20,7 @@ module BingAdsApi
   #
   # Holds all the services, as well as login credentials.
   #
-  class Api < AdsCommonForBingAds::Api
+  class Api < AdsCommonBingForBingAds::Api
 
     # Constructor for API.
     def initialize(provided_config = nil)
@@ -36,7 +36,7 @@ module BingAdsApi
     # Retrieve correct soap_header_handler.
     #
     # Args:
-    # - auth_handler: instance of an AdsCommonForBingAds::Auth::BaseHandler subclass to
+    # - auth_handler: instance of an AdsCommonBingForBingAds::Auth::BaseHandler subclass to
     #   handle authentication
     # - version: intended API version
     # - header_ns: header namespace
@@ -49,7 +49,7 @@ module BingAdsApi
       auth_method = @config.read('authentication.method', :CLIENTLOGIN)
       handler_class = case auth_method
                       when :CLIENTLOGIN then BingAdsApi::ClientLoginHeaderHandler
-                      when :OAUTH, :OAUTH2 then AdsCommonForBingAds::SavonHeaders::OAuthHeaderHandler
+                      when :OAUTH, :OAUTH2 then AdsCommonBingForBingAds::SavonHeaders::OAuthHeaderHandler
                       end
       return handler_class.new(@credential_handler, auth_handler, header_ns, default_ns, version)
     end
@@ -150,7 +150,7 @@ module BingAdsApi
       version = api_config.default_version if version.nil?
       # Check if version exists.
       if !api_config.versions.include?(version)
-        raise AdsCommonForBingAds::Errors::Error, "Unknown version '%s'" % version
+        raise AdsCommonBingForBingAds::Errors::Error, "Unknown version '%s'" % version
       end
       return BingAdsApi::ReportUtils.new(self, version)
     end

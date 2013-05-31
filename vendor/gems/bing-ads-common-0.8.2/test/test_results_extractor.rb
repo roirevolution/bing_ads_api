@@ -22,9 +22,9 @@
 
 require 'test/unit'
 
-require 'ads_common/results_extractor'
+require 'ads_common_bing/results_extractor'
 
-module AdsCommon
+module AdsCommonBing
   class ResultsExtractor
 
     public :check_array_collapse
@@ -54,7 +54,7 @@ class TestResultsExtractor < Test::Unit::TestCase
   # Initialize tests.
   def setup()
     registry = StubRegistry.new()
-    @extractor = AdsCommon::ResultsExtractor.new(registry)
+    @extractor = AdsCommonBing::ResultsExtractor.new(registry)
   end
 
   def test_normalize_item_nil()

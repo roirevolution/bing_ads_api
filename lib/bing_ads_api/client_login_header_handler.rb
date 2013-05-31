@@ -1,7 +1,7 @@
 # Handles SOAP headers and namespaces definition for ClientLogin type header.
 
 module BingAdsApi
-  class ClientLoginHeaderHandler < AdsCommonForBingAds::SavonHeaders::BaseHeaderHandler
+  class ClientLoginHeaderHandler < AdsCommonBingForBingAds::SavonHeaders::BaseHeaderHandler
 
     private
 

@@ -82,7 +82,7 @@ module BingAdsApi
           @api.config.read('service.environment'), @version)
       headers = get_report_request_headers(url, cid)
       log_request(url, headers, definition_text)
-      response = AdsCommonForBingAds::Http.post_response(url, data, @api.config, headers)
+      response = AdsCommonBingForBingAds::Http.post_response(url, data, @api.config, headers)
       check_for_errors(response)
       return response
     end

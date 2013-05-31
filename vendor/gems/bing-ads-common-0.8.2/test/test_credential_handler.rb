@@ -23,19 +23,19 @@
 require 'logger'
 require 'minitest/mock'
 
-require 'ads_common/config'
-require 'ads_common/credential_handler'
+require 'ads_common_bing/config'
+require 'ads_common_bing/credential_handler'
 
 class TestCredentialHandler < Test::Unit::TestCase
 
   def setup()
     logger = Logger.new(STDERR)
     @default_credentials = {:client_customer_id => '1234567890', :foo => 'bar'}
-    config = AdsCommon::Config.new({
+    config = AdsCommonBing::Config.new({
         :library => {:logger => logger},
         :authentication => @default_credentials
     })
-    @handler = AdsCommon::CredentialHandler.new(config)
+    @handler = AdsCommonBing::CredentialHandler.new(config)
   end
 
   def test_credentials_simple()

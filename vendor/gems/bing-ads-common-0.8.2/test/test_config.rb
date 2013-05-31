@@ -22,7 +22,7 @@
 
 require 'test/unit'
 
-require 'ads_common/config'
+require 'ads_common_bing/config'
 
 class TestConfig < Test::Unit::TestCase
   DEFAULT_CONFIG_HASH = {
@@ -37,14 +37,14 @@ class TestConfig < Test::Unit::TestCase
   # Test initializer with no arguments.
   def test_initialize_nil
     assert_nothing_raised do
-      config = AdsCommon::Config.new
+      config = AdsCommonBing::Config.new
       assert_nil(config.read('service.use_ruby_names'))
     end
   end
 
   # Test initializer with hash argument.
   def test_initialize_hash
-    config = AdsCommon::Config.new(DEFAULT_CONFIG_HASH)
+    config = AdsCommonBing::Config.new(DEFAULT_CONFIG_HASH)
     assert_equal(false, config.read('service.use_ruby_names'))
     assert_equal('sandbox', config.read('service.environment'))
     assert_equal('ClientLogin', config.read('authentication.method'))
@@ -54,7 +54,7 @@ class TestConfig < Test::Unit::TestCase
 
   # Test initializer with filename argument.
   def test_initialize_filename_correct
-    config = AdsCommon::Config.new(DEFAULT_CONFIG_FILENAME)
+    config = AdsCommonBing::Config.new(DEFAULT_CONFIG_FILENAME)
     assert_equal(false, config.read('service.use_ruby_names'))
     assert_equal('sandbox', config.read('service.environment'))
     assert_equal('ClientLogin', config.read('authentication.method'))
@@ -64,14 +64,14 @@ class TestConfig < Test::Unit::TestCase
 
   # Test initializer with an incorrect existing file.
   def test_initialize_filename_incorrect
-    assert_raises (AdsCommon::Errors::Error) do
-      config = AdsCommon::Config.new('/dev/null')
+    assert_raises (AdsCommonBing::Errors::Error) do
+      config = AdsCommonBing::Config.new('/dev/null')
     end
   end
 
   # Test default result.
   def test_read_default_result
-    config = AdsCommon::Config.new(DEFAULT_CONFIG_HASH)
+    config = AdsCommonBing::Config.new(DEFAULT_CONFIG_HASH)
     assert_nil(config.read('unexisting.entry'))
     assert_equal('default', config.read('unexisting.entry', 'default'))
     assert_equal('sandbox', config.read('service.environment', 'production'))
@@ -79,7 +79,7 @@ class TestConfig < Test::Unit::TestCase
 
   # Test setter.
   def test_set
-    config = AdsCommon::Config.new(DEFAULT_CONFIG_HASH)
+    config = AdsCommonBing::Config.new(DEFAULT_CONFIG_HASH)
     assert_equal('sandbox', config.read('service.environment'))
     assert_nil(config.read('unexisting.entry'))
     config.set('unexisting.entry', 'foobar')
@@ -89,7 +89,7 @@ class TestConfig < Test::Unit::TestCase
 
   # Test subhash.
   def test_get_hash
-    config = AdsCommon::Config.new(DEFAULT_CONFIG_HASH)
+    config = AdsCommonBing::Config.new(DEFAULT_CONFIG_HASH)
     result = config.read('service')
     assert_instance_of(Hash, result)
     assert_equal('sandbox', result[:environment])

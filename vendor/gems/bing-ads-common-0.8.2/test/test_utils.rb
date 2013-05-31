@@ -22,7 +22,7 @@
 
 require 'test/unit'
 
-require 'ads_common/utils'
+require 'ads_common_bing/utils'
 
 
 class TestUtils < Test::Unit::TestCase

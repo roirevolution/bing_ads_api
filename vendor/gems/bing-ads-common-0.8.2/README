@@ -1,4 +1,4 @@
-= Google AdsCommon Library
+= Google AdsCommonBing Library
 
 This gem is a dependency for the new generation of Ruby Google Ads client
 libraries. It contains common code shared among all of these libraries, such as

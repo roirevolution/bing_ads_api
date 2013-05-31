@@ -22,10 +22,10 @@
 
 require 'test/unit'
 
-require 'ads_common/errors'
-require 'ads_common/parameters_validator'
+require 'ads_common_bing/errors'
+require 'ads_common_bing/parameters_validator'
 
-module AdsCommon
+module AdsCommonBing
   class ParametersValidator
     public :deep_copy, :add_attribute, :array_from_named_list
     public :check_required_argument_present, :arrayize
@@ -34,7 +34,7 @@ end
 
 class TestParametersValidator < Test::Unit::TestCase
   def setup
-    @validator = AdsCommon::ParametersValidator.new(nil)
+    @validator = AdsCommonBing::ParametersValidator.new(nil)
   end
 
   def test_deep_copy_simple
@@ -106,10 +106,10 @@ class TestParametersValidator < Test::Unit::TestCase
   def test_check_required_argument_present
     field1 = {:min_occurs => 1, :max_occurs => 1,
               :name => 'field1', :type => 'type1'}
-    assert_raises(AdsCommon::Errors::MissingPropertyError) do
+    assert_raises(AdsCommonBing::Errors::MissingPropertyError) do
       @validator.check_required_argument_present(nil, field1)
     end
-    assert_raises(AdsCommon::Errors::TypeMismatchError) do
+    assert_raises(AdsCommonBing::Errors::TypeMismatchError) do
       @validator.check_required_argument_present([], field1)
     end
     assert_nothing_raised do
@@ -120,7 +120,7 @@ class TestParametersValidator < Test::Unit::TestCase
 
     field2 = {:min_occurs => 0, :max_occurs => :unbounded,
               :name => 'field2', :type => 'type2'}
-    assert_raises(AdsCommon::Errors::TypeMismatchError) do
+    assert_raises(AdsCommonBing::Errors::TypeMismatchError) do
       @validator.check_required_argument_present({}, field2)
     end
     assert_nothing_raised do
