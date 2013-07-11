@@ -44,7 +44,6 @@ class AdsCommonBingForBingAds::SavonService < AdsCommonBing::SavonService
     additional_headers = args.delete(:headers) unless args.nil?
     prepend_namespace_to_hash(args, ns)
     prepend_namespace_to_hash(additional_headers, ns)
-    puts "**************************************args = #{args}"
     response = @client.request(ns, original_input_name, soap_action: original_action_name) do |soap|
       soap.body = args
       set_headers(soap, extra_namespaces)
