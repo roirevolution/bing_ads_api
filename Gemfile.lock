@@ -7,15 +7,15 @@ GIT
 PATH
   remote: .
   specs:
-    bing_ads_api (0.0.5)
+    bing_ads_api (0.0.6)
       activesupport (>= 3.1.0)
       savon (~> 1.2.0)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.2.13)
-      i18n (= 0.6.1)
+    activesupport (3.2.14)
+      i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     akami (1.2.0)
       gyoku (>= 0.4.0)
@@ -29,7 +29,7 @@ GEM
     httpauth (0.2.0)
     httpi (1.1.1)
       rack
-    i18n (0.6.1)
+    i18n (0.6.5)
     jwt (0.1.8)
       multi_json (>= 1.5)
     multi_json (1.7.4)
